@@ -3896,6 +3896,7 @@ void cpu_x86_cpuid(CPUX86State *env, uint32_t index, uint32_t count,
             *ebx |= (cs->nr_cores * cs->nr_threads) << 16;
             *edx |= CPUID_HT;
         }
+        *edx &= ~(1 << 26); //HACK: fix the value to avoid SSE instructions
         break;
     case 2:
         /* cache info: needed for Pentium Pro compatibility */
